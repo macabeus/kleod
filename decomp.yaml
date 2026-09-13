@@ -16,9 +16,11 @@ versions:
 
 tools:
   asmlift:
-    # the built ELF - asmlift symbol source (names from .symtab; no types-sidecar yet).
-    # Same file as versions[0].paths.elf; the ordinary `make` already produces it.
-    elf: kleod.elf
+    # asmlift's symbol source: names+addresses from .symtab, declaration shapes and function
+    # signatures from the DWARF agbcc's own -g already records, and the GBA I/O register
+    # macros from a DWARF macro sidecar. Built by `make asmlift-elf` (a copy of kleod.elf
+    # with one extra, non-alloc section) - the ROM and kleod.elf are untouched.
+    elf: kleod-syms.elf
   mapfile_parser:
     progress_report:
       report_data: False

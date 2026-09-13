@@ -111,7 +111,47 @@ $(C_BUILDDIR)/m4a.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werro
 $(C_BUILDDIR)/eeprom.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/eeprom.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1 -fhex-asm -g
 
-.PHONY: all rom tools clean-tools mostlyclean clean compare tidy $(TOOLDIRS)
+### asmlift symbol-source ELF (see the README's "About this fork" section) ###
+# `make asmlift-elf` derives $(SYMS_ELF): a copy of the built ELF with ONE extra section, the
+# DWARF macro table of a sidecar object. It is NOT linked into the game (it is compiled by a
+# modern gcc under -mabi=apcs-gnu and ld refuses to mix APCS/AAPCS objects), and the ROM is
+# untouched — $(ELF) is only copied.
+#
+# Why the sidecar is needed at all: agbcc's own -g (CFLAGS above) already records types and a
+# signature for every function it compiles, but agbcc cannot emit macro info, and this project
+# names the GBA I/O registers with address-cast macros (`#define REG_DISPCNT (*(vu16 *)...)`,
+# include/gba/io_reg.h) rather than externs. Those macros are the project's whole `volatile`
+# channel, and a symbol map derived from the raw ELF carries none of them.
+#   -g3                        record macro definitions
+#   -gdwarf-2 -gstrict-dwarf   emit .debug_macinfo (inline strings, ONE self-contained section)
+#                              rather than DWARF-5 .debug_macro, which splits across COMDAT
+#                              groups and references .debug_str — neither survives a graft
+#   -I .                       ctx.c lives in build/, its #include lines are root-relative
+SIDECAR_CC := $(TOOLCHAIN)gcc
+C_HEADERS  := $(shell find include -name "*.h")
+CTX_C      := $(OBJ_DIR)/ctx.c
+CTX_OBJ    := $(OBJ_DIR)/ctx.o
+SYMS_ELF   := $(BUILD_NAME)-syms.elf
+
+$(CTX_C): $(C_HEADERS)
+	@for header in $(C_HEADERS); do echo "#include \"$$header\""; done > $@
+
+$(CTX_OBJ): $(CTX_C)
+	@echo "$(SIDECAR_CC) -g3 <macro-sidecar> -o $@"
+	@$(SIDECAR_CC) $(CPPFLAGS) -I . -mabi=apcs-gnu -gdwarf-2 -g3 -gstrict-dwarf \
+		-fno-eliminate-unused-debug-types -w -c $< -o $@
+
+$(SYMS_ELF): $(ELF) $(CTX_OBJ)
+	@cp $(ELF) $@
+	@$(OBJCOPY) -O binary --only-section=.debug_macinfo \
+		--set-section-flags .debug_macinfo=alloc $(CTX_OBJ) $(OBJ_DIR)/ctx.macinfo.bin
+	@$(OBJCOPY) --add-section .debug_macinfo=$(OBJ_DIR)/ctx.macinfo.bin $@
+	@rm -f $(OBJ_DIR)/ctx.macinfo.bin
+	@echo "built $@"
+
+asmlift-elf: $(SYMS_ELF)
+
+.PHONY: all rom tools clean-tools mostlyclean clean compare tidy asmlift-elf $(TOOLDIRS)
 
 MAKEFLAGS += --no-print-directory
 
@@ -144,7 +184,7 @@ clean-tools:
 clean: mostlyclean clean-tools
 
 tidy:
-	rm -f $(ROM) $(ELF) $(MAP)
+	rm -f $(ROM) $(ELF) $(MAP) $(SYMS_ELF)
 	rm -r build/*
 
 include graphics_file_rules.mk
