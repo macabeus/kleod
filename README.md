@@ -8,13 +8,20 @@ benchmark reproducible. It is the upstream
 were vendored from — plus a minimal integration commit:
 
 - `decomp.yaml` — adds a `tools.asmlift` block pointing asmlift at the project's symbol
-  source (`tools.asmlift.elf`): `kleod.elf`, the ELF the normal build already produces
-  (names-only, no types-sidecar); no extra build step
+  source (`tools.asmlift.elf`): `kleod-syms.elf`
+- `Makefile` — adds the `asmlift-elf` target that derives `kleod-syms.elf`: a copy of the
+  built `kleod.elf` with one extra, non-alloc section, the DWARF macro table of a sidecar
+  object compiled from the project's own headers. The ROM and `kleod.elf` are untouched
+  (the sidecar is never linked into the game), so `make compare` is unaffected. It exists
+  because agbcc's `-g` — which already gives asmlift declaration shapes and a signature for
+  every function it compiles — cannot record macros, and this project names the GBA I/O
+  registers with address-cast macros (`include/gba/io_reg.h`) rather than externs; those
+  macros carry the `volatile` qualifier asmlift needs to spell an MMIO access correctly.
 - nothing else differs from upstream
 
-To reproduce the benchmark rows: build the project as usual (the ROM must match) — the
-built ELF is the symbol source — then follow the per-function scripts published in the
-benchmark report.
+To reproduce the benchmark rows: build the project as usual (the ROM must match), then
+`make asmlift-elf` — the derived `kleod-syms.elf` is the symbol source — then follow the
+per-function scripts published in the benchmark report.
 
 ---
 
