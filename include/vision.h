@@ -1,5 +1,5 @@
-#ifndef GUARD_CODE_08001158_H
-#define GUARD_CODE_08001158_H
+#ifndef GUARD_VISION_H
+#define GUARD_VISION_H
 
 #include "global.h"
 
@@ -31,4 +31,4 @@ void LoadBg2TilemapData(u8 tileYOffset);
 void ClearedAllVisionsScreenInit(void);
 void ClearedAllVisionsScreenHandler(void);
 
-#endif // GUARD_CODE_08001158_H
+#endif // GUARD_VISION_H

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "transitions.h"
 #include "code_08025B78.h"
-#include "code_08001158.h"
+#include "vision.h"
 #include "code_08003D58.h"
 #include "wait_for_next_frame.h"
 #include "code_08039D8C.h"

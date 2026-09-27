@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_08001158.h"
+#include "vision.h"
 #include "code_08003D58.h"
 #include "wait_for_next_frame.h"
 #include "code_08014184.h"
