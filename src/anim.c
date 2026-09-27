@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_08025B78.h"
+#include "anim.h"
 #include "transitions.h"
 #include "vision.h"
 #include "code_08003D58.h"

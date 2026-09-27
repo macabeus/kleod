@@ -4,7 +4,7 @@
 #include "wait_for_next_frame.h"
 #include "code_08014184.h"
 #include "transitions.h"
-#include "code_08025B78.h"
+#include "anim.h"
 #include "code_08039D8C.h"
 #include "code_08043BA4.h"
 #include "code_080472B0.h"

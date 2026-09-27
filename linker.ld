@@ -234,7 +234,7 @@ SECTIONS {
         src/code_0800D188.o(.text);
         src/code_08014184.o(.text);
         src/transitions.o(.text);
-        src/code_08025B78.o(.text);
+        src/anim.o(.text);
         src/code_0802688C.o(.text);
         src/code_08039D8C.o(.text);
         src/decompress.o(.text);

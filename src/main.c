@@ -2,7 +2,7 @@
 #include "main.h"
 #include "wait_for_next_frame.h"
 #include "transitions.h"
-#include "code_08025B78.h"
+#include "anim.h"
 #include "code_080472B0.h"
 #include "eeprom.h"
 #include "heap.h"

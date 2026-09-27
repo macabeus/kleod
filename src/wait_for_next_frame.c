@@ -3,7 +3,7 @@
 #include "vision.h"
 #include "code_08003D58.h"
 #include "transitions.h"
-#include "code_08025B78.h"
+#include "anim.h"
 #include "code_08039D8C.h"
 #include "save.h"
 #include "main.h"

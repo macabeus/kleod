@@ -3,7 +3,7 @@
 #include "code_08003D58.h"
 #include "wait_for_next_frame.h"
 #include "transitions.h"
-#include "code_08025B78.h"
+#include "anim.h"
 #include "save.h"
 #include "code_080472B0.h"
 #include "decompress.h"

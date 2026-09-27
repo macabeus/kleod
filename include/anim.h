@@ -1,5 +1,5 @@
-#ifndef GUARD_CODE_08025B78_H
-#define GUARD_CODE_08025B78_H
+#ifndef GUARD_ANIM_H
+#define GUARD_ANIM_H
 
 #include "global.h"
 
@@ -13,4 +13,4 @@ void DrawLevelTimer(void);
 void DrawVisionStart(void);
 void DrawVisionEnd(void);
 
-#endif // GUARD_CODE_08025B78_H
+#endif // GUARD_ANIM_H
