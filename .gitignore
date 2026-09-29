@@ -38,7 +38,8 @@
 .fuse_hidden*
 .idea/
 Thumbs.db
-build/
+/build/
+/data/
 cmake-build-*
 sound/songs/midi/*.s
 src/*.s
@@ -50,7 +51,6 @@ types_*.taghl
 !calcrom.pl
 !sound/programmable_wave_samples/*.pcm
 _Deparsed_XSubs.pm
-*.py
 useful
 *.cheats
 *.ss*

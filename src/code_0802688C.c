@@ -22,7 +22,7 @@ extern struct Unk_08189A24 *gUnk_08189A24[6][9];
 extern void *gUnk_0818B800[6][7];
 
 // tiles
-extern u8 gUnk_0805C6E8[0x200]; // enemy respawner? maybe alt version since its only used in one level
+extern u8 gUnk_0805C6E8[0x200]; // enemy respawner
 extern u8 gUnk_0805C8E8[0x80]; // little bubble idk
 extern u8 gUnk_0805C968[0x80]; // littler bubble idk
 extern u8 gUnk_0805C9E8[0x800]; // VISION

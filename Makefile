@@ -58,6 +58,7 @@ MID := tools/mid2agb/mid2agb
 SCANINC := tools/scaninc/scaninc
 PREPROC := tools/preproc/preproc
 FIX := tools/gbafix/gbafix
+EXTRACTOR = tools/extractor.py
 
 # Clear the default suffixes
 .SUFFIXES:
@@ -101,7 +102,7 @@ OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 SUBDIRS  := $(sort $(dir $(OBJS)))
 $(shell mkdir -p $(SUBDIRS))
 
-TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
+TOOLDIRS := $(filter-out tools/agbcc tools/extractor.py tools/binutils,$(wildcard tools/*))
 TOOLBASE = $(TOOLDIRS:tools/%=%)
 TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 
@@ -111,11 +112,9 @@ $(C_BUILDDIR)/m4a.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werro
 $(C_BUILDDIR)/eeprom.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/eeprom.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1 -fhex-asm -g
 
-.PHONY: all rom tools clean-tools mostlyclean clean compare tidy $(TOOLDIRS)
+.PHONY: all rom tools clean-tools mostlyclean clean compare extract tidy $(TOOLDIRS)
 
 MAKEFLAGS += --no-print-directory
-
-AUTO_GEN_TARGETS :=
 
 all: tools rom
 
@@ -132,11 +131,11 @@ $(TOOLDIRS):
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: all
 
+extract:
+	python3 $(EXTRACTOR)
+
 mostlyclean: tidy
-	# rm -f sound/direct_sound_samples/*.bin
-	rm -f $(SONG_OBJS) $(MID_SUBDIR)/*.s
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
-	rm -f $(AUTO_GEN_TARGETS)
+	rm -r data/*
 
 clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)

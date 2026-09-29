@@ -32,6 +32,9 @@ To set up the repository:
 
 	cd ../kleod
 
+To extract assets:
+	make extract
+
 To build **kleod.gba**:
 
 	make -j$(nproc)
