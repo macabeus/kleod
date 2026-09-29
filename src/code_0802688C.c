@@ -4,20 +4,7 @@
 #include "anim.h"
 #include "structs/variables.h"
 
-// TODO: proper pointers
-struct Unk_08189A24 {
-    u8 pad0[0x3C - 0x0];
-    void ***unk3C;
-    u8 pad40[0x60 - 0x40];
-    void ***unk60;
-    u8 pad64[0x6C - 0x64];
-    void ***unk6C;
-    u8 pad70[0x78 - 0x70];
-    void ***unk78;
-    u8 pad7C[0x90 - 0x7C];
-    void ***unk90;
-};
-extern struct Unk_08189A24 *gUnk_08189A24[6][9];
+extern struct EntityAnimationData *gUnk_08189A24[6][9];
 
 extern void *gUnk_0818B800[6][7];
 
@@ -982,7 +969,7 @@ void LoadObjects_World1Boss(void)
 
     DmaCopy16Wait(3, &gUnk_08078508, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C, gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[0]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     SetEntityAnimationInfoState(0x16, 0);
@@ -999,9 +986,9 @@ void LoadObjects_World1Boss(void)
 
     DmaCopy16Wait(3, &gUnk_08078528, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk60, gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][8].pFrames[0]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk60, gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][8].pFrames[0]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
     DmaCopy16Wait(3, &gUnk_08061888, gObjVramPtr, 0x100);
     gObjVramPtr += 0x100;
@@ -1622,7 +1609,7 @@ void LoadObjects_World2Boss(void)
 
     DmaCopy16Wait(3, &gUnk_08078628, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C, gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[0]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     DmaCopy16Wait(3, &gUnk_08078328, gObjPalRamPtr, 0x20);
@@ -1634,16 +1621,16 @@ void LoadObjects_World2Boss(void)
 
     DmaCopy16Wait(3, &gUnk_08078648, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk60, gObjVramPtr, 0x200);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][8].pFrames[0]->src, gObjVramPtr, 0x200);
     gObjVramPtr += 0x200;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk60, gObjVramPtr, 0x200);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][8].pFrames[0]->src, gObjVramPtr, 0x200);
     gObjVramPtr += 0x200;
 
     DmaCopy16Wait(3, &gUnk_08078668, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk78, gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][10].pFrames[0]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk90[1], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][12].pFrames[1]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     DmaCopy16Wait(3, &gUnk_08078688, gObjPalRamPtr, 0x20);
@@ -2259,7 +2246,7 @@ void LoadObjects_World3Boss(void)
 
     DmaCopy16Wait(3, &gUnk_08078728, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C, gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[0]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     DmaCopy16Wait(3, &gUnk_08078348, gObjPalRamPtr, 0x20);
@@ -2273,7 +2260,7 @@ void LoadObjects_World3Boss(void)
 
     DmaCopy16Wait(3, &gUnk_08078748, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk6C, gObjVramPtr, 0x200);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][9].pFrames[0]->src, gObjVramPtr, 0x200);
     gObjVramPtr += 0x200;
     DmaCopy16Wait(3, EWRAM_START + 0xA984, gObjVramPtr, 0x20);
     gObjVramPtr += 0x20;
@@ -2282,14 +2269,14 @@ void LoadObjects_World3Boss(void)
 
     DmaCopy16Wait(3, &gUnk_08078728, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x24/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[9]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     DmaCopy16Wait(3, &gUnk_08078788, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x28/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[10]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x2C/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[11]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     DmaCopy16Wait(3, &gUnk_080783A8, gObjPalRamPtr, 0x20);
@@ -2930,7 +2917,7 @@ void LoadObjects_World4Boss(void)
 
     DmaCopy16Wait(3, &gUnk_080788A8, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C, gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[0]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     SetEntityAnimationInfoState(0x12, 0);
@@ -3671,7 +3658,7 @@ void LoadObjects_World5Boss(void)
 
     DmaCopy16Wait(3, &gUnk_08078948, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x20/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[8]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     DmaCopy16Wait(3, &gUnk_08078328, gObjPalRamPtr, 0x20);
@@ -3686,24 +3673,24 @@ void LoadObjects_World5Boss(void)
 
     DmaCopy16Wait(3, &gUnk_08078968, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C, gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[0]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C, gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[0]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
-    DmaCopy16Wait(3, **gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C, gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[0]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     DmaCopy16Wait(3, &gUnk_08078988, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x38/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[14]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x44/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[17]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x44/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[17]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x4/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[1]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x8/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[2]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     DmaCopy16Wait(3, &gUnk_080783A8, gObjPalRamPtr, 0x20);
@@ -4100,12 +4087,12 @@ void sub_080392A4(void)
 
     DmaCopy16Wait(3, &gUnk_080789C8, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x60/4], gObjVramPtr, 0x200);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[24]->src, gObjVramPtr, 0x200);
     gObjVramPtr += 0x200;
 
     DmaCopy16Wait(3, &gUnk_080789E8, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x8/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[2]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     DmaCopy16Wait(3, &gUnk_08078328, gObjPalRamPtr, 0x20);
@@ -4120,19 +4107,19 @@ void sub_080392A4(void)
 
     DmaCopy16Wait(3, &gUnk_08078A28, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x4C/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[19]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x54/4], gObjVramPtr, 0x200);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[21]->src, gObjVramPtr, 0x200);
     gObjVramPtr += 0x200;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x54/4], gObjVramPtr, 0x200);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[21]->src, gObjVramPtr, 0x200);
     gObjVramPtr += 0x200;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x50/4], gObjVramPtr, 0x400);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[20]->src, gObjVramPtr, 0x400);
     gObjVramPtr += 0x400;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x1C/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[7]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x20/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[8]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x24/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[9]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     DmaCopy16Wait(3, &gUnk_08078A48, gObjPalRamPtr, 0x20);
@@ -4146,7 +4133,7 @@ void sub_080392A4(void)
 
     DmaCopy16Wait(3, &gUnk_08078A68, gObjPalRamPtr, 0x20);
     gObjPalRamPtr += 0x20;
-    DmaCopy16Wait(3, *gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level]->unk3C[0x8/4], gObjVramPtr, 0x800);
+    DmaCopy16Wait(3, gUnk_08189A24[gUnk_03004C20.world - 1][gUnk_03004C20.level][5].pFrames[2]->src, gObjVramPtr, 0x800);
     gObjVramPtr += 0x800;
 
     DmaCopy16Wait(3, &gUnk_080783A8, gObjPalRamPtr, 0x20);
@@ -4226,7 +4213,7 @@ void LoadObjects_Common(void)
         gEntityInfo[0xB].visible = 1;
     }
 
-    if ((gUnk_03004C20.level - 1) >= 0 && (gUnk_03004C20.level - 1) <= 6)
+    if ((gUnk_03004C20.level >= 1) && (gUnk_03004C20.level <= 7))
     {
         DmaCopy16Wait(3, gUnk_0818B800[gUnk_03004C20.world - 1][gUnk_03004C20.level - 1], gObjVramPtr, 0x800);
         gObjVramPtr += 0x800;

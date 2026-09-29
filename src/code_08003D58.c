@@ -34,7 +34,7 @@ extern const u8 gUnk_080E2A84[0x6][0x8];
 
 extern void (*gUnk_08116620[6][9])(void); // pointers to "load level" functions
 
-extern void *gUnk_08189A24[6][9];
+extern struct EntityAnimationData *gUnk_08189A24[6][9];
 
 extern struct Unk_0300466C *gUnk_0818B8E0[6][9];
 
