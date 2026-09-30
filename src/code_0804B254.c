@@ -230,8 +230,7 @@ void sub_0804B464(s32 arg0, s32 arg1)
     sub_0804B424((void*)gUnk_08189BCC[gUnk_08057ACC[arg0][arg1][0]][gUnk_08057ACC[arg0][arg1][1] - 2], gBgInfo[gUnk_08057ACC[arg0][arg1][1]].pTiles, gBgInfo[gUnk_08057ACC[arg0][arg1][1]].nbrTiles * gBgInfo[gUnk_08057ACC[arg0][arg1][1]].tileSize);
 }
 
-// (98.24%) https://decomp.me/scratch/3jF9A
-NONMATCH("asm/nonmatching/sub_0804B4B0.inc", void sub_0804B4B0(s32 arg0, s32 arg1))
+void sub_0804B4B0(s32 arg0, s32 arg1)
 {
     s32 sp4;
     void *sp8;
@@ -240,7 +239,7 @@ NONMATCH("asm/nonmatching/sub_0804B4B0.inc", void sub_0804B4B0(s32 arg0, s32 arg
     u32 sp14;
     u32 sp18;
     u8 *temp_r8;
-    s32 var_r3;
+    s32 var_r3; // Can also just use arg1, removes first fake statement
     s32 var_r7;
     u32 var_sl;
     u32 var_r8;
@@ -248,7 +247,8 @@ NONMATCH("asm/nonmatching/sub_0804B4B0.inc", void sub_0804B4B0(s32 arg0, s32 arg
 
     var_r3 = arg1; // FAKE?
     var_sb = gUnk_08057ACC[arg0][arg1][1];
-    var_r3 = gUnk_08057ACC[arg0][arg1][0];
+    do {} while(0); // Fake
+    var_r3 = gUnk_08057ACC[arg0][arg1][0]; // Can also use separate s32 temp_r3; variable for this
     spC = gUnk_030034A0->unk3[var_sb - 2];
 
     if ((gUnk_030034A0->unk1_0 != 0) && (var_sb == 2))
@@ -399,8 +399,7 @@ NONMATCH("asm/nonmatching/sub_0804B4B0.inc", void sub_0804B4B0(s32 arg0, s32 arg
 
             for (var_r3 = sp10; var_r3 < 0x20; var_r3++)
             {
-                gBgInfo[2].vLength += 0; // FAKE
-
+                if (var_r3) var_r3++,var_r3--; // Fake
                 DmaFill16(3, 0, gBgInfo[var_sb].pTilemap + (var_r7 * 0x800) + (var_r3 * 0x40), 0x40);
             }
         }
@@ -408,7 +407,6 @@ NONMATCH("asm/nonmatching/sub_0804B4B0.inc", void sub_0804B4B0(s32 arg0, s32 arg
         thunk_HeapFree(sp8 - 4);
     }
 }
-END_NONMATCH
 
 void sub_0804B920(s32 arg0, s32 arg1)
 {
